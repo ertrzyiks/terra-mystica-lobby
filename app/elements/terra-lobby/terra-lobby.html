@@ -1,15 +1,30 @@
 <link rel="import" href="../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../terra-lobby-item/terra-lobby-item.html">
 
-<polymer-element name="terra-lobby" attributes="">
+<polymer-element name="terra-lobby" attributes="players">
     <template>
         <link rel="stylesheet" href="terra-lobby.css">
-        Hello world
+
+        <template repeat="{{fraction, i in fractions}}">
+            <terra-lobby-item player-index="{{i}}" fraction="{{fractions}}"></terra-lobby-item>
+        </template>
     </template>
+
     <script>
         (function () {
-          Polymer({
-            // define element prototype here
-          });
+            Polymer({
+                created: function () {
+                    this.players = 3;
+                },
+                ready: function () {
+                    console.log(this.players);
+                    this.fractions = [
+                        "dwarfs",
+                        "fakirs",
+                        "chaos magicians"
+                    ];
+                }
+            });
         })();
     </script>
 </polymer-element>
