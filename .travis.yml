@@ -2,7 +2,7 @@ language: nodejs
 before_script:
 - npm install
 script:
-- npm build
+- npm run build
 - npm test
 deploy:
   provider: heroku

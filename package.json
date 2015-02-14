@@ -42,6 +42,7 @@
   "scripts": {
     "start": "node app",
     "install": "./node_modules/.bin/bower install",
-    "test": "./node_modules/.bin/gulp test:remote"
+    "test": "./node_modules/.bin/gulp test:remote",
+    "build": "./node_modules/.bin/gulp"
   }
 }
