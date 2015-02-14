@@ -1,14 +1,19 @@
 <link rel="import" href="../../../bower_components/polymer/polymer.html">
 
-<polymer-element name="terra-lobby-item" attributes="">
-  <template>
-    <link rel="stylesheet" href="terra-lobby-item.css">
-  </template>
-  <script>
-    (function () {
-      Polymer({
-        // define element prototype here
-      });
-    })();
-  </script>
+<polymer-element name="terra-lobby-item" attributes="index faction">
+    <template>
+        <link rel="stylesheet" href="terra-lobby-item.css">
+
+        <h1>Player #{{index + 1}}</h1>
+        {{faction.name}}
+    </template>
+    <script>
+        (function () {
+            Polymer({
+                ready: function () {
+
+                }
+            });
+        })();
+    </script>
 </polymer-element>

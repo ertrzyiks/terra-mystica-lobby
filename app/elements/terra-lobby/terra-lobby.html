@@ -1,28 +1,81 @@
 <link rel="import" href="../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../bower_components/core-meta/core-meta.html">
 <link rel="import" href="../terra-lobby-item/terra-lobby-item.html">
+<link rel="import" href="metadata.html">
 
-<polymer-element name="terra-lobby" attributes="players">
+<polymer-element name="terra-lobby" attributes="playersNum">
     <template>
         <link rel="stylesheet" href="terra-lobby.css">
 
-        <template repeat="{{fraction, i in fractions}}">
-            <terra-lobby-item player-index="{{i}}" fraction="{{fractions}}"></terra-lobby-item>
+        <paper-button on-click="{{ onRandomizeClick }}" id="randomize" raised>Randomize</paper-button>
+
+        <template repeat="{{faction, i in factions}}">
+            <terra-lobby-item index="{{i}}" faction="{{faction}}"></terra-lobby-item>
         </template>
     </template>
 
     <script>
         (function () {
+            function shuffle(array) {
+                var currentIndex = array.length, temporaryValue, randomIndex ;
+
+                // While there remain elements to shuffle...
+                while (0 !== currentIndex) {
+
+                    // Pick a remaining element...
+                    randomIndex = Math.floor(Math.random() * currentIndex);
+                    currentIndex -= 1;
+
+                    // And swap it with the current element.
+                    temporaryValue = array[currentIndex];
+                    array[currentIndex] = array[randomIndex];
+                    array[randomIndex] = temporaryValue;
+                }
+
+                return array;
+            }
+
             Polymer({
                 created: function () {
-                    this.players = 3;
+                    this.playersNum = 3;
                 },
+
                 ready: function () {
-                    console.log(this.players);
-                    this.fractions = [
-                        "dwarfs",
-                        "fakirs",
-                        "chaos magicians"
-                    ];
+                    this.selectFactions();
+                },
+
+                onRandomizeClick: function () {
+                    this.selectFactions();
+                },
+
+                playersNumChanged: function (oldValue, newValue) {
+                    this.selectFactions(newValue);
+                },
+
+                selectFactions: function (num) {
+                    var meta = document.createElement('core-meta'),
+                            factionsMeta = meta.byId('factions'),
+                            factions = this.getFactionsFrom(factionsMeta);
+
+                    this.factions = shuffle(factions).slice(0, num || this.playersNum);
+                },
+
+                getFactionsFrom: function (factionsMeta) {
+                    var params = factionsMeta.children,
+                        paramsNum = params.length,
+                        factions = [],
+                        i, param;
+
+                    for (i = 0; i < paramsNum; i++) {
+                        param = params[i];
+
+                        factions.push({
+                            name: param.getAttribute('name'),
+                            color: param.getAttribute('color')
+                        });
+                    }
+
+                    return factions;
                 }
             });
         })();

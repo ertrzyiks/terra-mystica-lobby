@@ -23,7 +23,6 @@
 
 <body unresolved fullbleed layout vertical>
     <template is="auto-binding" id="app">
-
         <core-drawer-panel>
 
             <!-- Drawer -->
@@ -33,18 +32,17 @@
                 <core-toolbar>Players num</core-toolbar>
 
                 <!-- Drawer Content -->
-                <core-menu selected="0">
-                    <paper-item>2 players</paper-item>
-                    <paper-item>3 players</paper-item>
-                    <paper-item>4 players</paper-item>
-                    <paper-item>5 players</paper-item>
-                </core-menu>
+                <core-selector selected="{{playersNum}}" valueattr="value">
+                    <paper-item value="2">2 players</paper-item>
+                    <paper-item value="3">3 players</paper-item>
+                    <paper-item value="4">4 players</paper-item>
+                    <paper-item value="5">5 players</paper-item>
+                </core-selector>
 
-                </core-header-panel>
+            </core-header-panel>
 
-                <!-- Main -->
-                <core-header-panel main>
-
+            <!-- Main -->
+            <core-header-panel main>
                 <!-- Main Toolbar -->
                 <core-toolbar>
                     <paper-icon-button icon="menu" core-drawer-toggle></paper-icon-button>
@@ -52,9 +50,8 @@
                 </core-toolbar>
 
                 <!-- Main Content -->
-                <div class="hero-unit">
-                    <terra-lobby></terra-lobby>
-                </div>
+                <terra-lobby playersNum="{{playersNum}}"></terra-lobby>
+
             </core-header-panel>
         </core-drawer-panel>
     </template>
