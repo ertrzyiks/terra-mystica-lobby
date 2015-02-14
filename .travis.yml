@@ -1,0 +1,14 @@
+language: nodejs
+before_script:
+- npm install
+script:
+- npm build
+- npm test
+deploy:
+  provider: heroku
+  skip_cleanup: true
+  api_key:
+    secure: Semmz7jhXzTZ9w4+d++v5Ju4AOIyNuoVHqw+PUES1/QemW6lScNn7VlDy34yD5Q+owSYNyvoclTYKKMoVqeNNrJw3wrUlxuMDCklanNI34rLLh/zFas6afZwSjT49UowAQhZbEhQmjk6vSPRkoJJj1NI5IZiKoxs53M4nogKu9U=
+  app: terra-mystica-lobby
+  on:
+    repo: ertrzyiks/terra-mystica-lobby
