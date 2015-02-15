@@ -5,27 +5,21 @@ before_install:
  - gem install sass
 script:
  - npm test
+
+env:
+  global:
+   - GH_REF: "github.com/ertrzyiks/terra-mystica-lobby"
+   - GIT_NAME: "ertrzyiks"
+   - GIT_EMAIL: "mateusz.derks+travis@gmail.com"
 cache:
   directories:
     - node_modules
 after_success:
-  # Turn off warnings about SSH keys:
-  - echo "Host heroku.com" >> ~/.ssh/config
-  - echo "   StrictHostKeyChecking no" >> ~/.ssh/config
-  - echo "   CheckHostIP no" >> ~/.ssh/config
-  - echo "   UserKnownHostsFile=/dev/null" >> ~/.ssh/config
-  # Clear your current Heroku SSH keys:
-  - heroku keys:clear
-  # Add a new SSH key to Heroku
-  - yes | heroku keys:add
-  # Clone Heroku deployment repo to dist folder
-  - git clone https://git.heroku.com/terra-mystica-lobby.git dist
-  # Build
-  - npm run build
-  # Commit and Push dist folder to Heroku
-  - cd dist
-  - git config --global user.name "ertrzyiks"
-  - git config --global user.email "mateusz.derks@gmail.com"
-  - git add *
-  - git commit -am "Travis CI"
-  - git push origin master
+ - npm run build
+ - cd dist
+ - git init
+ - git config user.name ${GIT_NAME}
+ - git config user.email ${GIT_EMAIL}
+ - git add .
+ - git commit -m "Deployed to Github Pages"
+ - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:gh-pages > /dev/null 2>&1
