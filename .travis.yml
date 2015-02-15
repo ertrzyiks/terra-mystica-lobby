@@ -1,21 +1,31 @@
 language: node_js
 node_js:
-- "0.10"
+ - "0.10"
 before_install:
  - gem install sass
 script:
-- npm run build
-- npm test
-- npm prune
+ - npm test
 cache:
   directories:
     - node_modules
-    - bower_components
-deploy:
-  provider: heroku
-  skip_cleanup: true
-  api_key:
-    secure: Semmz7jhXzTZ9w4+d++v5Ju4AOIyNuoVHqw+PUES1/QemW6lScNn7VlDy34yD5Q+owSYNyvoclTYKKMoVqeNNrJw3wrUlxuMDCklanNI34rLLh/zFas6afZwSjT49UowAQhZbEhQmjk6vSPRkoJJj1NI5IZiKoxs53M4nogKu9U=
-  app: terra-mystica-lobby
-  on:
-    repo: ertrzyiks/terra-mystica-lobby
+after_success:
+  # Turn off warnings about SSH keys:
+  - echo "Host heroku.com" >> ~/.ssh/config
+  - echo "   StrictHostKeyChecking no" >> ~/.ssh/config
+  - echo "   CheckHostIP no" >> ~/.ssh/config
+  - echo "   UserKnownHostsFile=/dev/null" >> ~/.ssh/config
+  # Clear your current Heroku SSH keys:
+  - heroku keys:clear
+  # Add a new SSH key to Heroku
+  - yes | heroku keys:add
+  # Clone Heroku deployment repo to dist folder
+  - git clone https://git.heroku.com/terra-mystica-lobby.git dist
+  # Build
+  - npm run build
+  # Commit and Push dist folder to Heroku
+  - cd dist
+  - git config --global user.name "ertrzyiks"
+  - git config --global user.email "mateusz.derks@gmail.com"
+  - git add *
+  - git commit -am "Travis CI"
+  - git push origin master
