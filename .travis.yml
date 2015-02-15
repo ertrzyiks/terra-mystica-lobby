@@ -1,6 +1,6 @@
-language: nodejs
-before_script:
-- npm install
+language: node_js
+node_js:
+- "0.10"
 script:
 - npm run build
 - npm test
