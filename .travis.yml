@@ -6,6 +6,7 @@ before_install:
 script:
 - npm run build
 - npm test
+- npm prune
 cache:
   directories:
     - node_modules
