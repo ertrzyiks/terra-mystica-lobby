@@ -4,6 +4,10 @@ before_script:
 script:
 - npm run build
 - npm test
+cache:
+  directories:
+    - node_modules
+    - bower_components
 deploy:
   provider: heroku
   skip_cleanup: true
