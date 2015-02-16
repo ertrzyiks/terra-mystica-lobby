@@ -19,7 +19,8 @@ $terrainColors: (
 
 @each $colorName, $colorValue in $terrainColors {
   .terrain-#{$colorName} {
-    background-color: $colorValue;
+    background-image: radial-gradient(lighten($colorValue, 15%), $colorValue);
+
     @if (lightness($colorValue) < 50) {
       color: #DEDEDE;
     } @else {
