@@ -57,10 +57,24 @@
 
                 selectFactions: function (num) {
                     var meta = document.createElement('core-meta'),
-                            factionsMeta = meta.byId('factions'),
-                            factions = this.getFactionsFrom(factionsMeta);
+                        factionsMeta = meta.byId('factions'),
+                        factions = this.getFactionsFrom(factionsMeta),
+                        faction, color, i;
 
-                    this.factions = shuffle(factions).slice(0, num || this.playersNum);
+                    this.factions = [];
+
+                    for (i = 0; i < this.playersNum; i++) {
+                        factions = shuffle(factions);
+                        faction = factions.shift();
+
+                        this.factions.push(faction);
+
+                        color = faction.color;
+
+                        factions = factions.filter(function (el) {
+                            return el.color !== color;
+                        });
+                    }
                 },
 
                 getFactionsFrom: function (factionsMeta) {
