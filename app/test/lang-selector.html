@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <title>terra-lobby</title>
+
+  <script src="../bower_components/webcomponentsjs/webcomponents.js"></script>
+  <script src="../bower_components/web-component-tester/browser.js"></script>
+
+  <!-- Step 1: import the element to test -->
+  <link rel="import" href="../elements/lang-selector/lang-selector.html">
+
+</head>
+<body>
+
+  <lang-selector id="fixture1"></lang-selector>
+
+  <script>
+      suite('lang-selector', function() {
+        test('It should have 3 languages to choose', function(done) {
+            var el = document.querySelector('#fixture1');
+
+            flush(function() {
+                var listItems = el.shadowRoot.querySelectorAll('[lang]');
+                assert.equal(listItems.length, 3);
+                done();
+            });
+        });
+
+    });
+  </script>
+
+</body>
+</html>

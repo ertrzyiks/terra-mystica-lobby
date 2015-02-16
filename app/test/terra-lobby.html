@@ -42,7 +42,7 @@
 
             flush(function() {
                 var listItems = el.shadowRoot.querySelectorAll('terra-lobby-item');
-                assert.equal(3, listItems.length);
+                assert.equal(listItems.length, 3);
                 done();
             });
         });

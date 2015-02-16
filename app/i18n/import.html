@@ -2,7 +2,7 @@
 <script>
     i18n.init({
         resStore: {},
-        lng: 'pl',
+        lng: window.location.hash.replace('#', '') || 'en',
         fallbackLng: 'en'
     });
 </script>

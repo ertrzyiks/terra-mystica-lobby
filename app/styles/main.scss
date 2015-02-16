@@ -23,3 +23,14 @@ core-toolbar {
 .core-selected {
   background: #DEDEDE;
 }
+
+
+lang-selector {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+
+  @media screen and (max-height: 400px) {
+    position: relative;
+  }
+}
