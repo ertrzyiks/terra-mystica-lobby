@@ -13,16 +13,61 @@
 </head>
 <body>
 
-  <terra-lobby players="3"></terra-lobby>
+  <terra-lobby id="fixture1" players="3"></terra-lobby>
+
+  <div id="fixture2">
+      <terra-lobby players="5"></terra-lobby><terra-lobby players="5"></terra-lobby>
+      <terra-lobby players="5"></terra-lobby><terra-lobby players="5"></terra-lobby>
+      <terra-lobby players="5"></terra-lobby><terra-lobby players="5"></terra-lobby>
+      <terra-lobby players="5"></terra-lobby><terra-lobby players="5"></terra-lobby>
+      <terra-lobby players="5"></terra-lobby><terra-lobby players="5"></terra-lobby>
+      <terra-lobby players="5"></terra-lobby><terra-lobby players="5"></terra-lobby>
+      <terra-lobby players="5"></terra-lobby><terra-lobby players="5"></terra-lobby>
+      <terra-lobby players="5"></terra-lobby><terra-lobby players="5"></terra-lobby>
+      <terra-lobby players="5"></terra-lobby><terra-lobby players="5"></terra-lobby>
+      <terra-lobby players="5"></terra-lobby><terra-lobby players="5"></terra-lobby>
+  </div>
 
   <script>
+    function uniq(a) {
+      var seen = {};
+      return a.filter(function(item) {
+          return seen.hasOwnProperty(item) ? false : (seen[item] = true);
+      });
+    }
+
     suite('terra-lobby', function() {
         test('Item lengths should be equalled', function(done) {
-            var el = document.querySelector('terra-lobby');
+            var el = document.querySelector('#fixture1');
 
             flush(function() {
                 var listItems = el.shadowRoot.querySelectorAll('terra-lobby-item');
                 assert.equal(3, listItems.length);
+                done();
+            });
+        });
+
+        test('Colors should be unique', function(done) {
+            var el = document.querySelector('#fixture2');
+
+            flush(function() {
+                var lobbies = el.querySelectorAll('terra-lobby'),
+                    lobbiesLength = lobbies.length,
+                    lobbyItems,
+                    colors,
+                    uniqueColors,
+                    i;
+
+                for (i = 0; i < lobbiesLength; i++) {
+                    lobbyItems = lobbies[i].shadowRoot.querySelectorAll('terra-lobby-item');
+
+                    colors = Array.prototype.slice.call(lobbyItems).map(function (item) {
+                        return item.faction.color;
+                    });
+                    uniqueColors = uniq(colors);
+
+                    assert.equal(colors.length, uniqueColors.length);
+                }
                 done();
             });
         })
