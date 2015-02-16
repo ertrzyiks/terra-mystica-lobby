@@ -1,3 +1,29 @@
+$terrainColors: (
+  red: #D66A3D,
+  blue: #53A9BA,
+  green: #8FB368,
+  brown: #85643F,
+  black: #353530,
+  yellow: #D2AD3E,
+  grey: #787C74
+);
+
 :host {
   display: block;
+  padding: 1em;
+  margin: .5em;
+  min-width: 200px;
+  min-height: 200px;
+  position: relative;
+}
+
+@each $colorName, $colorValue in $terrainColors {
+  .terrain-#{$colorName} {
+    background-color: $colorValue;
+    @if (lightness($colorValue) < 50) {
+      color: #DEDEDE;
+    } @else {
+      color: #333;
+    }
+  }
 }

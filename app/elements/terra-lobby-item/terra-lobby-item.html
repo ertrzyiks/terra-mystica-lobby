@@ -1,11 +1,15 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-shadow/paper-shadow.html">
 
 <polymer-element name="terra-lobby-item" attributes="index faction">
     <template>
         <link rel="stylesheet" href="terra-lobby-item.css">
 
-        <h1>Player #{{index + 1}}</h1>
-        {{faction.name}}
+        <paper-shadow z="1" class="terrain-{{faction.color}}" layout horizontal center fit>
+            <div style="width: 100%" layout vertical center>
+                <span>{{faction.name}}</span>
+            </div>
+        </paper-shadow>
     </template>
     <script>
         (function () {

@@ -6,12 +6,15 @@
 <polymer-element name="terra-lobby" attributes="playersNum">
     <template>
         <link rel="stylesheet" href="terra-lobby.css">
+        <core-media-query query="max-width: 840px" queryMatches="{{phoneScreen}}"></core-media-query>
 
         <paper-button on-click="{{ onRandomizeClick }}" id="randomize" raised>Randomize</paper-button>
 
-        <template repeat="{{faction, i in factions}}">
-            <terra-lobby-item index="{{i}}" faction="{{faction}}"></terra-lobby-item>
-        </template>
+        <div layout around-justified wrap vertical?="{{phoneScreen}}" horizontal?="{{!phoneScreen}}">
+            <template repeat="{{faction, i in factions}}">
+                <terra-lobby-item index="{{i}}" faction="{{faction}}"></terra-lobby-item>
+            </template>
+        </div>
     </template>
 
     <script>
