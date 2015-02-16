@@ -19,6 +19,12 @@
 
     <script>
         (function () {
+            function filterOutColor(factions, color) {
+                return factions.filter(function (el) {
+                    return el.color !== color;
+                });
+            }
+
             function shuffle(array) {
                 var currentIndex = array.length, temporaryValue, randomIndex ;
 
@@ -55,7 +61,7 @@
                     this.selectFactions(newValue);
                 },
 
-                selectFactions: function (num) {
+                selectFactions: function () {
                     var meta = document.createElement('core-meta'),
                         factionsMeta = meta.byId('factions'),
                         factions = this.getFactionsFrom(factionsMeta),
@@ -70,10 +76,7 @@
                         this.factions.push(faction);
 
                         color = faction.color;
-
-                        factions = factions.filter(function (el) {
-                            return el.color !== color;
-                        });
+                        factions = filterOutColor(factions, color);
                     }
                 },
 

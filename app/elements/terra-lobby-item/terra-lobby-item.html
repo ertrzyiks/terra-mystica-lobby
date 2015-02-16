@@ -7,7 +7,7 @@
 
         <paper-shadow z="1" class="terrain-{{faction.color}}" layout horizontal center fit>
             <div style="width: 100%" layout vertical center>
-                <span>{{faction.name}}</span>
+                <span>{{factionLabel}}</span>
             </div>
         </paper-shadow>
     </template>
@@ -15,7 +15,7 @@
         (function () {
             Polymer({
                 ready: function () {
-
+                    this.factionLabel = i18n.t('factions.' + this.faction.name);
                 }
             });
         })();
