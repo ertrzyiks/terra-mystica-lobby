@@ -8,6 +8,7 @@
     "i18next": "~1.7.7"
   },
   "devDependencies": {
-    "web-component-tester": "Polymer/web-component-tester#^2.2.3"
+    "web-component-tester": "Polymer/web-component-tester#^2.2.3",
+    "q": "1.0.1"
   }
 }

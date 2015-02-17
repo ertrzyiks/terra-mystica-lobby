@@ -64,9 +64,18 @@
 
             </core-header-panel>
         </core-drawer-panel>
+
+        <paper-action-dialog id="updatePopup" backdrop heading="New version!" transition="core-transition-center"
+                             layered="false">
+            <p>There is new version available, do you want to download? It wont take long.</p>
+
+            <paper-button dismissive>Later</paper-button>
+            <paper-button affirmative autofocus on-click="{{onDownloadNewVersion}}">Yes, please</paper-button>
+        </paper-action-dialog>
     </template>
 
     <!-- build:js ./scripts/app.js -->
+    <script src="./bower_components/q/q.js"></script>
     <script src="./scripts/app.js"></script>
     <!-- endbuild-->
 </body>
