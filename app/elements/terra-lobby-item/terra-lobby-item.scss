@@ -16,9 +16,42 @@ $terrainColors: (
   min-height: 200px;
   position: relative;
 
+  perspective: 600px;
+
   @media screen and (max-width: 760px) {
     min-height: 100px;
   }
+}
+
+.item {
+  opacity: 0;
+  transform: rotateY(90deg) scale(0.5);
+  transition: all 0.5s cubic-bezier(.36,-0.64,.34,1.76);
+
+  &.show {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.item-0 {
+  transition-delay: 0;
+}
+
+.item-1 {
+  transition-delay: 200ms;
+}
+
+.item-2 {
+  transition-delay: 400ms;
+}
+
+.item-3 {
+  transition-delay: 600ms;
+}
+
+.item-4 {
+  transition-delay: 800ms;
 }
 
 @each $colorName, $colorValue in $terrainColors {

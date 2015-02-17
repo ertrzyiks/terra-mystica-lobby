@@ -5,7 +5,7 @@
     <template>
         <link rel="stylesheet" href="terra-lobby-item.css">
 
-        <paper-shadow z="1" class="terrain-{{faction.color}}" layout horizontal center fit>
+        <paper-shadow z="1" class="item item-{{index}} terrain-{{faction.color}}" layout horizontal center fit>
             <div style="width: 100%" layout vertical center>
                 <span>{{factionLabel}}</span>
             </div>
@@ -16,6 +16,12 @@
             Polymer({
                 ready: function () {
                     this.factionLabel = i18n.t('factions.' + this.faction.name);
+
+                    var item = this.shadowRoot.querySelector('.item');
+
+                    setTimeout(function () {
+                        item.classList.add('show');
+                    }, 10);
                 }
             });
         })();
