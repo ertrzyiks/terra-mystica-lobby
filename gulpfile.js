@@ -51,8 +51,7 @@ gulp.task('images', function () {
 gulp.task('copy', function () {
   var app = gulp.src([
     'app/*',
-    '!app/test',
-    'node_modules/apache-server-configs/dist/.htaccess'
+    '!app/test'
   ], {
     dot: true
   }).pipe(gulp.dest('dist'));
@@ -147,15 +146,46 @@ gulp.task('html', function () {
 
 // Vulcanize imports
 gulp.task('vulcanize', function () {
-  var DEST_DIR = 'dist/elements';
+  var DEST_DIR = 'dist';
 
-  return gulp.src('dist/elements/elements.vulcanized.html')
+  return gulp.src('dist/index.html')
     .pipe($.vulcanize({
       dest: DEST_DIR,
       strip: true
     }))
     .pipe(gulp.dest(DEST_DIR))
     .pipe($.size({title: 'vulcanize'}));
+});
+
+// Generate cache manifest
+gulp.task('manifest', function () {
+    var DEST_DIR = 'dist';
+
+    return gulp
+        .src([
+            DEST_DIR + '/*',
+            DEST_DIR + '/bower_components/i18next/i18next.min.js',
+            DEST_DIR + '/bower_components/polymer/polymer.js',
+            DEST_DIR + '/bower_components/webcomponentsjs/webcomponents.min.js',
+            DEST_DIR + '/bower_components/core-focusable/polymer-mixin.js',
+            DEST_DIR + '/bower_components/core-focusable/core-focusable.js',
+            DEST_DIR + '/styles/**',
+            DEST_DIR + '/images/**',
+            DEST_DIR + '/scripts/**'
+        ], {
+            base: DEST_DIR
+        })
+        .pipe($.manifest({
+            hash: true,
+            preferOnline: true,
+            filename: 'cache.manifest',
+            exclude: [
+                'cache.manifest',
+                'robots.txt'
+            ]
+        }))
+        .pipe(gulp.dest(DEST_DIR))
+        .pipe($.size({title: 'manifest'}));
 });
 
 // Clean Output Directory
@@ -203,6 +233,7 @@ gulp.task('default', ['clean'], function (cb) {
     'elements',
     ['jshint', 'images', 'fonts', 'html'],
     'vulcanize',
+    'manifest',
     cb);
 });
 
