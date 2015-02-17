@@ -23,6 +23,15 @@ $terrainColors: (
   }
 }
 
+.icon {
+  width: 140px;
+  margin-bottom: 7px;
+
+  @media screen and (max-width: 760px) {
+    width: 70px;
+  }
+}
+
 .item {
   opacity: 0;
   transform: rotateY(90deg) scale(0.5);

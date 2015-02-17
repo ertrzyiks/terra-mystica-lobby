@@ -171,6 +171,7 @@ gulp.task('manifest', function () {
             DEST_DIR + '/bower_components/core-focusable/core-focusable.js',
             DEST_DIR + '/styles/**',
             DEST_DIR + '/images/**',
+            '!' + DEST_DIR + '/images/launcher/**',
             DEST_DIR + '/scripts/**'
         ], {
             base: DEST_DIR

@@ -7,6 +7,7 @@
 
         <paper-shadow z="1" class="item item-{{index}} terrain-{{faction.color}}" layout horizontal center fit>
             <div style="width: 100%" layout vertical center>
+                <img class="icon" src="../../images/factions/{{faction.name}}.jpg" />
                 <span>{{factionLabel}}</span>
             </div>
         </paper-shadow>
@@ -21,7 +22,7 @@
 
                     setTimeout(function () {
                         item.classList.add('show');
-                    }, 10);
+                    }, 30);
                 }
             });
         })();
