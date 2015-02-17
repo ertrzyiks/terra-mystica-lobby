@@ -17,12 +17,12 @@
 
   <script>
       suite('lang-selector', function() {
-        test('It should have 3 languages to choose', function(done) {
+        test('It should have 4 languages to choose', function(done) {
             var el = document.querySelector('#fixture1');
 
             flush(function() {
                 var listItems = el.shadowRoot.querySelectorAll('[lang]');
-                assert.equal(listItems.length, 3);
+                assert.equal(listItems.length, 4);
                 done();
             });
         });
