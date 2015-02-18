@@ -7,4 +7,4 @@ Small web app which help to setup Terra Mystica board game. Powered by Polymer.
 ## Attributions
 
 - Faction icons are property of Feuerland, originally published on http://www.terra-mystica-spiel.de/en/
-- Launcher icons are generated with https://github.com/romannurik/AndroidAssetStudio
+- Gfx assets and launcher icon crafted by [@przemyslawkubicki](https://github.com/przemyslawkubicki/)
