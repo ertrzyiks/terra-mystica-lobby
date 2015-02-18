@@ -4,7 +4,7 @@
 <link rel="import" href="../../i18n/import.html">
 <link rel="import" href="metadata.html">
 
-<polymer-element name="terra-lobby" attributes="playersNum">
+<polymer-element name="terra-lobby" attributes="factions playersNum">
     <template>
         <link rel="stylesheet" href="terra-lobby.css">
         <core-media-query query="max-width: 840px" queryMatches="{{phoneScreen}}"></core-media-query>
@@ -46,20 +46,33 @@
             }
 
             Polymer({
+                factions: null,
+
                 created: function () {
                     this.playersNum = 3;
+                    this.factions = [];
                 },
 
                 ready: function () {
-                    this.selectFactions();
+                    this.validateInputFactions();
+
+                    if (this.factions.length == 0) {
+                        this.selectFactions();
+                    }
                 },
 
                 onRandomizeClick: function () {
                     this.selectFactions();
                 },
 
-                playersNumChanged: function (oldValue, newValue) {
-                    this.selectFactions(newValue);
+                playersNumChanged: function () {
+                    if (this.factions.length != this.playersNum) {
+                        this.selectFactions();
+                    }
+                },
+
+                factionsChanged: function () {
+                    this.validateInputFactions();
                 },
 
                 selectFactions: function () {
@@ -68,7 +81,7 @@
                         factions = this.getFactionsFrom(factionsMeta),
                         faction, color, i;
 
-                    this.factions = [];
+                    this.factions.length = 0;
 
                     for (i = 0; i < this.playersNum; i++) {
                         factions = shuffle(factions);
@@ -97,6 +110,12 @@
                     }
 
                     return factions;
+                },
+
+                validateInputFactions: function () {
+                    if (Object.prototype.toString.call(this.factions) !== '[object Array]') {
+                        this.factions = [];
+                    }
                 }
             });
         })();

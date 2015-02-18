@@ -12,21 +12,34 @@
 
 </head>
 <body>
+    <terra-lobby id="fixture1" playersNum="4"></terra-lobby>
 
-  <terra-lobby id="fixture1" players="3"></terra-lobby>
+    <template is="auto-binding" id="app">
+        <div id="fixture2">
+          <terra-lobby playersNum="5"></terra-lobby><terra-lobby playersNum="5"></terra-lobby>
+          <terra-lobby playersNum="5"></terra-lobby><terra-lobby playersNum="5"></terra-lobby>
+          <terra-lobby playersNum="5"></terra-lobby><terra-lobby playersNum="5"></terra-lobby>
+          <terra-lobby playersNum="5"></terra-lobby><terra-lobby playersNum="5"></terra-lobby>
+          <terra-lobby playersNum="5"></terra-lobby><terra-lobby playersNum="5"></terra-lobby>
+          <terra-lobby playersNum="5"></terra-lobby><terra-lobby playersNum="5"></terra-lobby>
+          <terra-lobby playersNum="5"></terra-lobby><terra-lobby playersNum="5"></terra-lobby>
+          <terra-lobby playersNum="5"></terra-lobby><terra-lobby playersNum="5"></terra-lobby>
+          <terra-lobby playersNum="5"></terra-lobby><terra-lobby playersNum="5"></terra-lobby>
+          <terra-lobby playersNum="5"></terra-lobby><terra-lobby playersNum="5"></terra-lobby>
+        </div>
+        
+        <terra-lobby id="fixture3" playersNum="2" factions="{{fixture3test}}"></terra-lobby>
+        <span id="fixture3-output">{{fixture3test.length}}</span>
 
-  <div id="fixture2">
-      <terra-lobby players="5"></terra-lobby><terra-lobby players="5"></terra-lobby>
-      <terra-lobby players="5"></terra-lobby><terra-lobby players="5"></terra-lobby>
-      <terra-lobby players="5"></terra-lobby><terra-lobby players="5"></terra-lobby>
-      <terra-lobby players="5"></terra-lobby><terra-lobby players="5"></terra-lobby>
-      <terra-lobby players="5"></terra-lobby><terra-lobby players="5"></terra-lobby>
-      <terra-lobby players="5"></terra-lobby><terra-lobby players="5"></terra-lobby>
-      <terra-lobby players="5"></terra-lobby><terra-lobby players="5"></terra-lobby>
-      <terra-lobby players="5"></terra-lobby><terra-lobby players="5"></terra-lobby>
-      <terra-lobby players="5"></terra-lobby><terra-lobby players="5"></terra-lobby>
-      <terra-lobby players="5"></terra-lobby><terra-lobby players="5"></terra-lobby>
-  </div>
+        <terra-lobby id="fixture4" playersNum="2" factions="{{predefinedFactions}}"></terra-lobby>
+        <terra-lobby id="fixture5" playersNum="2" factions="{{invalidPredefinedFactions}}"></terra-lobby>
+    </template>
+
+  <script>
+      var app = document.querySelector('#app');
+      app.predefinedFactions = [{ name: 'one', color: 'blue' }, { name: 'two', color: 'red'}];
+      app.invalidPredefinedFactions = {};
+  </script>
 
   <script>
     function uniq(a) {
@@ -42,7 +55,7 @@
 
             flush(function() {
                 var listItems = el.shadowRoot.querySelectorAll('terra-lobby-item');
-                assert.equal(listItems.length, 3);
+                assert.equal(listItems.length, 4);
                 done();
             });
         });
@@ -70,7 +83,40 @@
                 }
                 done();
             });
-        })
+        });
+
+        test('Factions attribute should be array of factions', function(done) {
+            var el = document.querySelector('#fixture3-output');
+
+            flush(function() {
+                assert.equal(el.innerHTML, '2');
+                done();
+            });
+        });
+
+        test('Factions attribute be setter value', function(done) {
+            var el = document.querySelector('#fixture4');
+
+            flush(function() {
+                var listItems = el.shadowRoot.querySelectorAll('terra-lobby-item');
+
+                assert.equal(listItems.length, 2);
+                assert.equal(listItems[0].faction.name, 'one');
+                assert.equal(listItems[1].faction.name, 'two');
+                done();
+            });
+        });
+
+        test('Factions attribute be setter value with validation', function(done) {
+            var el = document.querySelector('#fixture5');
+
+            flush(function() {
+                var listItems = el.shadowRoot.querySelectorAll('terra-lobby-item');
+
+                assert.equal(listItems.length, 2);
+                done();
+            });
+        });
     });
   </script>
 

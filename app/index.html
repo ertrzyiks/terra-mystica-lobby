@@ -37,6 +37,9 @@
     <![endif]-->
 
     <template is="auto-binding" id="app">
+        <core-localstorage name="players-num" value="{{playersNum}}"></core-localstorage>
+        <core-localstorage name="selected-factions" value="{{selectedFactions}}"></core-localstorage>
+
         <core-drawer-panel>
 
             <!-- Drawer -->
@@ -66,7 +69,7 @@
                 </core-toolbar>
 
                 <!-- Main Content -->
-                <terra-lobby playersNum="{{playersNum}}"></terra-lobby>
+                <terra-lobby playersNum="{{playersNum}}" factions="{{selectedFactions}}"></terra-lobby>
 
             </core-header-panel>
         </core-drawer-panel>
