@@ -2,31 +2,31 @@
     "name": "Terra Mystica lobby",
     "icons": [
         {
-            "src": "images/launcher/mipmap-mdpi/ic_launcher.png",
+            "src": "images/launcher/android/drawable-mdpi/ic_launcher.png",
             "sizes": "48x48",
             "type": "image/png",
             "density": "1.0"
         },
         {
-            "src": "images/launcher/mipmap-hdpi/ic_launcher.png",
+            "src": "images/launcher/android/drawable-hdpi/ic_launcher.png",
             "sizes": "72x72",
             "type": "image/png",
             "density": "1.5"
         },
         {
-            "src": "images/launcher/mipmap-xhdpi/ic_launcher.png",
+            "src": "images/launcher/android/drawable-xhdpi/ic_launcher.png",
             "sizes": "96x96",
             "type": "image/png",
             "density": "2.0"
         },
         {
-            "src": "images/launcher/mipmap-xxhdpi/ic_launcher.png",
+            "src": "images/launcher/android/drawable-xxhdpi/ic_launcher.png",
             "sizes": "144x144",
             "type": "image/png",
             "density": "3.0"
         },
         {
-            "src": "images/launcher/mipmap-xxxhdpi/ic_launcher.png",
+            "src": "images/launcher/android/drawable-xxxhdpi/ic_launcher.png",
             "sizes": "192x192",
             "type": "image/png",
             "density": "4.0"
