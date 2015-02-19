@@ -180,6 +180,11 @@ gulp.task('manifest', function () {
             hash: true,
             preferOnline: true,
             filename: 'cache.manifest',
+            cache: [
+                'http://fonts.googleapis.com/css?family=Josefin+Sans&subset=latin,latin-ext',
+                'http://fonts.gstatic.com/s/josefinsans/v9/xgzbb53t8j-Mo-vYa23n5ojoYw3YTyktCCer_ilOlhE.woff2',
+                'http://fonts.gstatic.com/s/josefinsans/v9/xgzbb53t8j-Mo-vYa23n5hampu5_7CjHW5spxoeN3Vs.woff2'
+            ],
             exclude: [
                 'cache.manifest',
                 'robots.txt'
