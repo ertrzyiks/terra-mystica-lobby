@@ -3,6 +3,7 @@
 
     var app = document.querySelector('#app');
     app.appName = 'Terra Mystica lobby';
+    app.appDescription = i18n.t('app.description');
     app.playersNum = 3;
     app.onDownloadNewVersion = function () {
         setTimeout(function () {

@@ -56,7 +56,6 @@
                     <paper-item value="5">5 players</paper-item>
                 </core-selector>
 
-
                 <lang-selector></lang-selector>
             </core-header-panel>
 
@@ -66,7 +65,26 @@
                 <core-toolbar>
                     <paper-icon-button icon="menu" core-drawer-toggle></paper-icon-button>
                     <span>{{appName}}</span>
+                    <span flex></span>
                 </core-toolbar>
+
+                <div class="social-buttons">
+                    <a href="https://github.com/ertrzyiks/terra-mystica-lobby" class="social-button-link">
+                        <core-icon src="images/github.png"></core-icon>
+                    </a>
+
+                    <twitter-button
+                            text="Get a random set of factions for Terra Mystica with app"
+                            user=""
+                            hashtag="Polymer"
+                            href="http://ertrzyiks.github.io/terra-mystica-lobby/">
+                    </twitter-button>
+                </div>
+
+                <p class="app-description">
+                    {{appDescription}}
+
+                </p>
 
                 <!-- Main Content -->
                 <terra-lobby playersNum="{{playersNum}}" factions="{{selectedFactions}}"></terra-lobby>
