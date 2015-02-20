@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <title>terra-lobby</title>
+
+  <script src="../bower_components/webcomponentsjs/webcomponents.js"></script>
+  <script src="../bower_components/web-component-tester/browser.js"></script>
+
+  <!-- Step 1: import the element to test -->
+  <link rel="import" href="../i18n/import.html">
+  <link rel="import" href="../elements/terra-lobby-item/terra-lobby-item.html">
+
+</head>
+<body>
+    <terra-lobby-item id="fixture1" faction="{{ { name: 'mermaids', color: 'red' }}}" revealOnClick="true">
+    </terra-lobby-item>
+
+  <script>
+    suite('terra-lobby-item', function() {
+        test('Item should be hidden when revealOnClick option is used', function(done) {
+            var el = document.querySelector('#fixture1');
+
+            flush(function() {
+                var item = el.shadowRoot.querySelector('paper-shadow');
+                assert.equal(item.classList.contains('hidden'), true);
+                done();
+            });
+        });
+
+        test('Item should not be hidden when clicked', function(done) {
+            var el = document.querySelector('#fixture1');
+
+            flush(function() {
+                var item = el.shadowRoot.querySelector('.touch-cursor');
+
+                item.dispatchEvent(new MouseEvent('click', {
+                    bubbles: true
+                }));
+
+                assert.equal(item.parentNode.classList.contains('hidden'), false);
+                done();
+            });
+        });
+    });
+  </script>
+
+</body>
+</html>

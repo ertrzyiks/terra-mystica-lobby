@@ -37,7 +37,7 @@ $terrainColors: (
 .item {
   opacity: 0;
   transform: rotateY(90deg) scale(0.5);
-  transition: all 0.5s cubic-bezier(.36,-0.64,.34,1.76);
+
 
   &.show {
     opacity: 1;
@@ -45,29 +45,19 @@ $terrainColors: (
   }
 }
 
-.item-0 {
-  transition-delay: 0;
-}
-
-.item-1 {
-  transition-delay: 200ms;
-}
-
-.item-2 {
-  transition-delay: 400ms;
-}
-
-.item-3 {
-  transition-delay: 600ms;
-}
-
-.item-4 {
-  transition-delay: 800ms;
+@for $i from 0 through 4 {
+  .item-#{$i} {
+    transition:
+      transform 0.5s cubic-bezier(.36,-0.64,.34,1.76) $i * 200ms,
+      opacity 0.5s cubic-bezier(.36,-0.64,.34,1.76) $i * 200ms,
+      background-color 0.4s ease-in;
+  }
 }
 
 @each $colorName, $colorValue in $terrainColors {
   .terrain-#{$colorName} {
-    background-image: radial-gradient(lighten($colorValue, 15%), $colorValue);
+    background-image: radial-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.0));
+    background-color: $colorValue;
 
     @if (lightness($colorValue) < 50) {
       color: #DEDEDE;
@@ -75,4 +65,37 @@ $terrainColors: (
       color: #333;
     }
   }
+}
+
+paper-shadow {
+  position: relative;
+}
+
+.hidden {
+  background-color: #DEDEDE;
+}
+
+.faction {
+  width: 100%;
+  transform-style: preserve-3d;
+  opacity: 1;
+  transform: none;
+  transition: transform 0.3s ease-out, opacity 0.3s ease-in 0.1s;
+}
+
+.touch-cursor {
+  position: absolute;
+  color: #333333;
+  text-align: center;
+
+  opacity: 0;
+  text-transform: uppercase;
+}
+
+.hidden > .faction {
+  transform: rotateY(-180deg);
+  opacity: 0;
+}
+.hidden > .touch-cursor {
+  opacity: 1;
 }
