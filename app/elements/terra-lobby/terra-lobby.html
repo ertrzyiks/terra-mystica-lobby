@@ -4,7 +4,7 @@
 <link rel="import" href="../../i18n/import.html">
 <link rel="import" href="metadata.html">
 
-<polymer-element name="terra-lobby" attributes="factions playersNum">
+<polymer-element name="terra-lobby" attributes="factions playersNum revealOnClick">
     <template>
         <link rel="stylesheet" href="terra-lobby.css">
         <core-media-query query="max-width: 840px" queryMatches="{{phoneScreen}}"></core-media-query>
@@ -13,7 +13,8 @@
 
         <div layout around-justified wrap vertical?="{{phoneScreen}}" horizontal?="{{!phoneScreen}}">
             <template repeat="{{faction, i in factions}}">
-                <terra-lobby-item index="{{i}}" faction="{{faction}}"></terra-lobby-item>
+                <terra-lobby-item index="{{i}}" faction="{{faction}}" revealOnClick="{{revealOnClick}}">
+                </terra-lobby-item>
             </template>
         </div>
     </template>
