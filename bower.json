@@ -1,6 +1,6 @@
 {
   "name": "terra-mystica-lobby",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "dependencies": {
     "core-icon": "Polymer/core-icon#master",
     "core-elements": "Polymer/core-elements#^0.5.5",
