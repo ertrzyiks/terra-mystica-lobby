@@ -23,4 +23,5 @@ To build dist/ folder with ready to deploy code use
 ## Attributions
 
 - Faction icons are property of Feuerland, originally published on http://www.terra-mystica-spiel.de/en/
+- Expansion faction icons published on http://ludovox.fr/terra-mystica-fire-ice/
 - Gfx assets and launcher icon crafted by [@przemyslawkubicki](https://github.com/przemyslawkubicki/)

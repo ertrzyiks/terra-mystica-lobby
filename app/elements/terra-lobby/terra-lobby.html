@@ -4,7 +4,7 @@
 <link rel="import" href="../../i18n/import.html">
 <link rel="import" href="metadata.html">
 
-<polymer-element name="terra-lobby" attributes="factions playersNum revealOnClick">
+<polymer-element name="terra-lobby" attributes="factions playersNum revealOnClick withExpansion">
     <template>
         <link rel="stylesheet" href="terra-lobby.css">
         <core-media-query query="max-width: 840px" queryMatches="{{phoneScreen}}"></core-media-query>
@@ -76,10 +76,52 @@
                     this.validateInputFactions();
                 },
 
-                selectFactions: function () {
+                /**
+                 * Handle situtation when color should be replaced with other.
+                 *
+                 *  - White and variable colors should be replaced with one of terrain.
+                 */
+                applyColor: function (color, factions) {
+                    var affectedColors = ['white', 'variable'],
+                        blacklistedColors = ['white', 'variable', 'orange'],
+                        factionsNum = factions.length,
+                        index, i = 0;
+
+                    if (affectedColors.indexOf(color) === -1) {
+                        return color;
+                    }
+
+                    while(blacklistedColors.indexOf(color) !== -1) {
+                        index = Math.floor(Math.random() * factionsNum);
+
+                        color = factions[index].color;
+                        i = i + 1;
+
+                        if (i > 50) {
+                            break;
+                        }
+                    }
+
+                    return color;
+                },
+
+                getFactionsPool: function () {
                     var meta = document.createElement('core-meta'),
                         factionsMeta = meta.byId('factions'),
+                        factionsExpansionMeta = meta.byId('factions-form-expansion'),
                         factions = this.getFactionsFrom(factionsMeta),
+                        expansionFactions;
+
+                    if (this.withExpansion) {
+                        expansionFactions = this.getFactionsFrom(factionsExpansionMeta);
+                        Array.prototype.push.apply(factions, expansionFactions);
+                    }
+
+                    return factions;
+                },
+
+                selectFactions: function () {
+                    var factions = this.getFactionsPool(),
                         faction, color, i;
 
                     this.factions.length = 0;
@@ -87,11 +129,17 @@
                     for (i = 0; i < this.playersNum; i++) {
                         factions = shuffle(factions);
                         faction = factions.shift();
+                        color = faction.color;
+
+                        factions = filterOutColor(factions, color);
+
+                        faction.color = this.applyColor(faction.color, factions);
+
+                        if (faction.color !== color) {
+                            factions = filterOutColor(factions, faction.color);
+                        }
 
                         this.factions.push(faction);
-
-                        color = faction.color;
-                        factions = filterOutColor(factions, color);
                     }
                 },
 

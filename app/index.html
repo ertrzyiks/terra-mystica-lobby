@@ -41,6 +41,7 @@
         <core-localstorage name="players-num" value="{{playersNum}}"></core-localstorage>
         <core-localstorage name="selected-factions" value="{{selectedFactions}}"></core-localstorage>
         <core-localstorage name="reveal-on-click" value="{{revealOnClick}}"></core-localstorage>
+        <core-localstorage name="wiht-expansion" value="{{withExpansion}}"></core-localstorage>
 
         <core-drawer-panel>
 
@@ -59,9 +60,14 @@
                 </core-selector>
 
                 <div class="settings" vertical layout>
-                    <div center horizontal layout>
+                    <div class="settings-item" center horizontal layout>
                         <div flex>Reveal on click</div>
                         <paper-toggle-button checked="{{revealOnClick}}"></paper-toggle-button>
+                    </div>
+
+                    <div class="settings-item" center horizontal layout>
+                        <div flex>With Fire & Ice expansion</div>
+                        <paper-toggle-button checked="{{withExpansion}}"></paper-toggle-button>
                     </div>
                 </div>
 
@@ -98,7 +104,9 @@
                 <terra-lobby
                         playersNum="{{playersNum}}"
                         factions="{{selectedFactions}}"
-                        revealOnClick="{{revealOnClick}}"></terra-lobby>
+                        revealOnClick="{{revealOnClick}}"
+                        withExpansion="{{withExpansion}}">
+                </terra-lobby>
 
             </core-header-panel>
         </core-drawer-panel>
