@@ -27,13 +27,15 @@
           <terra-lobby playersNum="5"></terra-lobby><terra-lobby playersNum="5"></terra-lobby>
           <terra-lobby playersNum="5"></terra-lobby><terra-lobby playersNum="5"></terra-lobby>
         </div>
-        
+
         <terra-lobby id="fixture3" playersNum="2" factions="{{fixture3test}}"></terra-lobby>
         <span id="fixture3-output">{{fixture3test.length}}</span>
 
         <terra-lobby id="fixture4" playersNum="2" factions="{{predefinedFactions}}"></terra-lobby>
         <terra-lobby id="fixture5" playersNum="2" factions="{{invalidPredefinedFactions}}"></terra-lobby>
     </template>
+
+    <terra-lobby id="fixture6" playersNum="4" withExpansion="true"></terra-lobby>
 
   <script>
       var app = document.querySelector('#app');
@@ -114,6 +116,17 @@
                 var listItems = el.shadowRoot.querySelectorAll('terra-lobby-item');
 
                 assert.equal(listItems.length, 2);
+                done();
+            });
+        });
+
+        test('Pool of factions should be bigger when expansion is used', function(done) {
+            var el = document.querySelector('#fixture6');
+
+            flush(function() {
+                var listItems = el.getFactionsPool();
+
+                assert.equal(listItems.length, 20);
                 done();
             });
         });
