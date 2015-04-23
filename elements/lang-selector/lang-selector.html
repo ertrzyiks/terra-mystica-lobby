@@ -1,0 +1,37 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<polymer-element name="lang-selector" attributes="">
+  <template>
+    <link rel="stylesheet" href="lang-selector.css">
+
+    <div layout horizontal around-justified>
+      <paper-fab mini lang="en" src="../../images/flags/en.svg" aria-label="english"
+                 on-click="{{onLanguageChange}}">
+      </paper-fab>
+
+      <paper-fab mini lang="pl" src="../../images/flags/pl.svg" aria-label="polish"
+                 on-click="{{onLanguageChange}}">
+      </paper-fab>
+
+      <paper-fab mini lang="cz" src="../../images/flags/cz.svg" aria-label="czech"
+                 on-click="{{onLanguageChange}}">
+      </paper-fab>
+
+      <paper-fab mini lang="de" src="../../images/flags/de.svg" aria-label="german"
+                   on-click="{{onLanguageChange}}">
+      </paper-fab>
+    </div>
+  </template>
+  <script>
+    (function () {
+      Polymer({
+        onLanguageChange: function (e) {
+            var lang = e.target.getAttribute('lang');
+
+            window.location.hash = '#' + lang;
+            location.reload();
+        }
+      });
+    })();
+  </script>
+</polymer-element>

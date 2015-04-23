@@ -1,0 +1,43 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-shadow/paper-shadow.html">
+
+<polymer-element name="terra-lobby-item" attributes="index faction revealOnClick">
+    <template>
+        <link rel="stylesheet" href="terra-lobby-item.css">
+
+        <paper-shadow
+                z="1"
+                class="item item-{{index}} terrain-{{faction.color}} {{ {hidden: startHidden } | tokenList }}"
+                layout horizontal center fit>
+            <div class="faction" layout vertical center>
+                <img class="icon" src="images/factions/{{faction.name}}.png" />
+                <span>{{factionLabel}}</span>
+            </div>
+            <div class="touch-cursor" layout vertical center-justified fit on-click="{{reveal}}">
+                Touch
+            </div>
+        </paper-shadow>
+    </template>
+    <script>
+        (function () {
+            Polymer({
+                index: 0,
+
+                ready: function () {
+                    this.startHidden = this.revealOnClick;
+                    this.factionLabel = i18n.t('factions.' + this.faction.name);
+
+                    var item = this.shadowRoot.querySelector('.item');
+
+                    setTimeout(function () {
+                        item.classList.add('show');
+                    }, 30);
+                },
+
+                reveal: function (e) {
+                    e.target.parentNode.classList.remove('hidden');
+                }
+            });
+        })();
+    </script>
+</polymer-element>
